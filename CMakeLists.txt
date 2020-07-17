@@ -285,7 +285,7 @@ else()
 endif()
 
 # Eigen (required)
-find_package(Eigen REQUIRED)
+find_package(Eigen3 REQUIRED)
 include_directories(SYSTEM ${EIGEN_INCLUDE_DIRS})
 
 # FLANN (required)
@@ -436,7 +436,7 @@ PCL_ADD_INCLUDES(common "" "${pcl_config_h}")
 include_directories("${CMAKE_CURRENT_BINARY_DIR}/include")
 
 ### ---[ Set up for tests
-enable_testing()
+# enable_testing()
 
 ### ---[ Set up for examples
 #include("${PCL_SOURCE_DIR}/cmake/pcl_examples.cmake")
