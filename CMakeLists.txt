@@ -10,6 +10,15 @@ endif()
 
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "possible configurations" FORCE)
 
+set(HAVE_SSSE3_EXTENSIONS_EXITCODE OFF)
+set(HAVE_MM_MALLOC_EXITCODE OFF)
+set(HAVE_POSIX_MEMALIGN_EXITCODE OFF)
+set(HAVE_SSE4_2_EXTENSIONS_EXITCODE OFF)
+set(HAVE_SSE4_1_EXTENSIONS_EXITCODE OFF)
+set(HAVE_SSE3_EXTENSIONS_EXITCODE OFF)
+set(HAVE_SSE2_EXTENSIONS_EXITCODE OFF)
+set(HAVE_SSE_EXTENSIONS_EXITCODE OFF)
+
 # In case the user does not setup CMAKE_BUILD_TYPE, assume it's RelWithDebInfo
 if("${CMAKE_BUILD_TYPE}" STREQUAL "")
   set(CMAKE_BUILD_TYPE RelWithDebInfo CACHE STRING "build type default to RelWithDebInfo, set to Release to improve performance" FORCE)
@@ -42,8 +51,6 @@ if(WIN32 AND NOT MINGW)
     set(CMAKE_MINSIZEREL_POSTFIX "_release")
   endif()
 endif()
-
-set(HAVE_SSSE3_EXTENSIONS_EXITCODE OFF)
 
 # ---[ special maintainer mode
 SET(CMAKE_CXX_FLAGS_MAINTAINER "-pedantic -Wno-variadic-macros -Weffc++ -Wno-long-long" CACHE STRING
