@@ -43,6 +43,8 @@ if(WIN32 AND NOT MINGW)
   endif()
 endif()
 
+set(HAVE_SSSE3_EXTENSIONS_EXITCODE OFF)
+
 # ---[ special maintainer mode
 SET(CMAKE_CXX_FLAGS_MAINTAINER "-pedantic -Wno-variadic-macros -Weffc++ -Wno-long-long" CACHE STRING
     "Flags used by the C++ compiler during maintainer builds."
