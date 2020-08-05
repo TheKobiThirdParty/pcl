@@ -19,6 +19,15 @@ else()
   set(PCL_CXX_COMPILE_FEATURES cxx_std_14)
 endif()
 
+set(HAVE_MM_MALLOC_EXITCODE OFF)
+set(HAVE_POSIX_MEMALIGN_EXITCODE OFF)
+set(HAVE_SSE4_2_EXTENSIONS_EXITCODE OFF)
+set(HAVE_SSE4_1_EXTENSIONS_EXITCODE OFF)
+set(HAVE_SSSE3_EXTENSIONS_EXITCODE OFF)
+set(HAVE_SSE3_EXTENSIONS_EXITCODE OFF)
+set(HAVE_SSE2_EXTENSIONS_EXITCODE OFF)
+set(HAVE_SSE_EXTENSIONS_EXITCODE OFF)
+
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "possible configurations" FORCE)
 
 # In case the user does not setup CMAKE_BUILD_TYPE, assume it's RelWithDebInfo
@@ -123,9 +132,9 @@ endif()
 
 if(CMAKE_COMPILER_IS_MSVC)
   add_definitions("-DBOOST_ALL_NO_LIB -D_SCL_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_WARNINGS -DNOMINMAX -DPCL_ONLY_CORE_POINT_TYPES ${SSE_DEFINITIONS}")
-  
+
   add_compile_options(/bigobj)
-  
+
   if("${CMAKE_CXX_FLAGS}" STREQUAL "${CMAKE_CXX_FLAGS_DEFAULT}")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /fp:precise /wd4800 /wd4521 /wd4251 /wd4275 /wd4305 /wd4355 ${SSE_FLAGS_STR}")
 
@@ -145,7 +154,7 @@ if(CMAKE_COMPILER_IS_MSVC)
     ProcessorCount(CPUCores)
     set(MSVC_MP ${CPUCores} CACHE STRING "Number of simultaneously running compilers (0 = automatic detection by MSVC). See documentation of /MP flag.")
     if (CMAKE_VERSION VERSION_LESS 3.11.0)
-      # Usage of COMPILE_LANGUAGE generator expression for MSVC in add_compile_options requires at least CMake 3.11, see https://gitlab.kitware.com/cmake/cmake/issues/17435	  
+      # Usage of COMPILE_LANGUAGE generator expression for MSVC in add_compile_options requires at least CMake 3.11, see https://gitlab.kitware.com/cmake/cmake/issues/17435
       if(MSVC_MP EQUAL 0)
         # MSVC_MP is 0 in case the information cannot be determined by ProcessorCount => fallback
         set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /MP")
@@ -153,8 +162,8 @@ if(CMAKE_COMPILER_IS_MSVC)
       elseif(MSVC_MP GREATER 1)
         set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /MP${MSVC_MP}")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP${MSVC_MP}")
-      endif()      
-    else()      
+      endif()
+    else()
       if(MSVC_MP EQUAL 0)
         # MSVC_MP is 0 in case the information cannot be determined by ProcessorCount => fallback
         # Generator expression is necessary to limit /MP flag to C/CXX, so flag will be not set to e.g. CUDA (see https://gitlab.kitware.com/cmake/cmake/issues/17535)
@@ -290,7 +299,7 @@ endif()
 find_package(Threads REQUIRED)
 
 # Eigen (required)
-find_package(Eigen 3.1 REQUIRED)
+find_package(Eigen3 REQUIRED)
 include_directories(SYSTEM ${EIGEN_INCLUDE_DIRS})
 
 # FLANN (required)
