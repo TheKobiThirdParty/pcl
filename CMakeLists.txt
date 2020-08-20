@@ -285,7 +285,7 @@ else()
 endif()
 
 # Eigen (required)
-find_package(Eigen3 REQUIRED)
+find_package(Eigen REQUIRED)
 include_directories(SYSTEM ${EIGEN_INCLUDE_DIRS})
 
 # FLANN (required)
